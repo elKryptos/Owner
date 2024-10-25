@@ -9,7 +9,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {PersonMapper.class, FonteMapper.class})
 public interface StreamingMapper {
-    //@Mapping()
+    @Mapping(target = "personDto", source = "person")
+    @Mapping(target = "fonteDto", source = "fonte")
     StreamingDto toDto (Streaming streaming);
     Streaming toEntity (StreamingDto streamingDto);
     List<StreamingDto> toDtoList (List<Streaming> streamings);
