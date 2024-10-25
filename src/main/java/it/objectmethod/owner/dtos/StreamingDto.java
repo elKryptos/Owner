@@ -11,4 +11,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class StreamingDto {
     private String streamingId;
+    private PersonDto personDto;
+    private FonteDto fonteDto;
 }

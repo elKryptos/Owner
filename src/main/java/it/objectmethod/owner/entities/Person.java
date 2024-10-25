@@ -23,5 +23,5 @@ public class Person {
     private Car car;
 
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
-    private List<Streaming> streamings = new ArrayList<>();
+    private List<Streaming> streamings;
 }

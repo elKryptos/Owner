@@ -2,18 +2,19 @@ package it.objectmethod.owner.controllers;
 
 import it.objectmethod.owner.dtos.PersonDto;
 import it.objectmethod.owner.dtos.ResponseWrapper;
-import it.objectmethod.owner.entities.Person;
-import it.objectmethod.owner.exception.handler.ResponseUtil;
 import it.objectmethod.owner.filter.PersonParams;
 import it.objectmethod.owner.services.PersonService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.apache.tomcat.util.http.ResponseUtil.*;
 
 @RestController()
 @RequestMapping("/person")
@@ -38,12 +39,11 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseWrapper<PersonDto>> getById(@PathVariable("id") int id, final HttpServletRequest request) {
-        //ResponseWrapper<PersonDto> response = personService.findById(id);
-        //if (response != null) return ResponseEntity.status(HttpStatus.OK).body(response);
-        return ResponseUtil
-                .execute(() ->
-                new ResponseEntity<>(personService.findById(id), HttpStatus.OK), request);
+   public ResponseEntity<ResponseWrapper<PersonDto>> findById(@PathVariable("id") int id, final HttpServletRequest request) {
+        ResponseWrapper<PersonDto> response = personService.findById(id);
+        if (response != null) return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
 }
+

@@ -12,6 +12,6 @@ import java.util.List;
 public class PersonDto {
     private String name;
     private String surname;
-    private int age;
-    private List<StreamingDto> streamingDtos = new ArrayList<>();
+    private Integer age;
+    private List<StreamingDto> streamingDtos;
 }

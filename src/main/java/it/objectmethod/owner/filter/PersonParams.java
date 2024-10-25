@@ -7,9 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 public class PersonParams {
+    private List<Integer> ids;
     @Nullable
     private String name;
     @Nullable
@@ -19,7 +22,14 @@ public class PersonParams {
     public Specification<Person> getSpecification() {
         return Specification.<Person>where(null)
                 .and(equalsNomeSpecification(name))
-                .and(equalsSurnameSpecification(surname));
+                .and(equalsSurnameSpecification(surname))
+                .and(equalsIdSpecification(ids));
+    }
+
+    private Specification<Person> equalsIdSpecification(List<Integer> ids) {
+        if (ids == null) return null;
+        //return (root, query, criteriaBuilder) -> root.get("id").in(ids);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.in(root.get("id")).value(ids);
     }
 
 //    Versione moderna
@@ -38,4 +48,5 @@ public class PersonParams {
         if (nome == null) return null;
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("name"), nome);
     }
+
 }

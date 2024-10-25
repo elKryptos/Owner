@@ -29,22 +29,22 @@ public class PersonService {
         return new ResponseWrapper<>("Lista trovata", personDtos);
     }
 
-    public ResponseWrapper<List<PersonDto>> findAll(PersonParams personParams) {
-        List<PersonDto> personDto = personMapper.toDtoList(personRepository.findAll(personParams.getSpecification()));
-        if (personDto.isEmpty()) {
-            return new ResponseWrapper<>("Lista vuota");
-        }
-        return new ResponseWrapper<>("Lista trovata", personDto);
-    }
-
     public ResponseWrapper<PersonDto> findById(int id) {
         Optional<Person> personOptional = personRepository.findById(id);
-       // if (personOptional.isPresent()) {
+        if (personOptional.isPresent()) {
             Person person = personOptional.get();
             PersonDto personDto = personMapper.toDto(person);
             return new ResponseWrapper<>("Persona trovata", personDto);
-       // }
-       // return new ResponseWrapper<>("Persona non trovata");
+        }
+        return new ResponseWrapper<>("Persona non trovata");
+    }
+
+    public ResponseWrapper<List<PersonDto>> findAll(PersonParams personParams) {
+        List<PersonDto> personDto = personMapper.toDtoList(personRepository.findAll(personParams.getSpecification()));
+        if (personDto.isEmpty()) {
+            return new ResponseWrapper<>("Valore non trovato");
+        }
+        return new ResponseWrapper<>("Valore trovato", personDto);
     }
 
 }

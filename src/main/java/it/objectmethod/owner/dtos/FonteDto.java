@@ -1,7 +1,9 @@
 package it.objectmethod.owner.dtos;
 
-import it.objectmethod.owner.entities.Streaming;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 public class FonteDto {
     private String nome;
-    private List<Streaming> streamings = new ArrayList<>();
-
+    private List<PersonDto> personDtos = new ArrayList<>();
 }
