@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,5 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 public class FonteDto {
     private String nome;
-    private List<PersonDto> personDtos = new ArrayList<>();
+    private List<PersonDto> persons;
 }

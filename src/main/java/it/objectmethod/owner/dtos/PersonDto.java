@@ -1,9 +1,9 @@
 package it.objectmethod.owner.dtos;
 
-import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -13,5 +13,5 @@ public class PersonDto {
     private String name;
     private String surname;
     private Integer age;
-    private List<StreamingDto> streamingDtos;
+    
 }

@@ -1,7 +1,6 @@
 package it.objectmethod.owner.filter;
 
 import it.objectmethod.owner.entities.Person;
-import it.objectmethod.owner.entities.Person_;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,7 +40,7 @@ public class PersonParams {
 
     private Specification<Person> equalsSurnameSpecification(String surname) {
         if (surname == null) return null;
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Person_.SURNAME), surname);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("surname"), surname);
     }
 
     private Specification<Person> equalsNomeSpecification(String nome) {

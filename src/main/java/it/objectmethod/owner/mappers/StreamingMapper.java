@@ -13,6 +13,8 @@ public interface StreamingMapper {
     @Mapping(target = "fonteDto", source = "fonte")
     StreamingDto toDto (Streaming streaming);
     Streaming toEntity (StreamingDto streamingDto);
+    @Mapping(target = "personDto", source = "person.streamings")
+    @Mapping(target = "fonteDto", source = "fonte.streamings")
     List<StreamingDto> toDtoList (List<Streaming> streamings);
     List<Streaming> toEntityList (List<StreamingDto> streamingDtos);
 }

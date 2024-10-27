@@ -17,6 +17,6 @@ public class Fonte {
     private String nome;
 
     @OneToMany(mappedBy = "fonte", fetch = FetchType.LAZY)
-    private List<Streaming> streamings = new ArrayList<>();
+    private List<Streaming> streamings;
 
 }

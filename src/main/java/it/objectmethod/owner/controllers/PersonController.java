@@ -7,14 +7,11 @@ import it.objectmethod.owner.services.PersonService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static org.apache.tomcat.util.http.ResponseUtil.*;
 
 @RestController()
 @RequestMapping("/person")
@@ -31,19 +28,18 @@ public class PersonController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseWrapper<PersonDto>> findById(@PathVariable("id") int id, final HttpServletRequest request) {
+        ResponseWrapper<PersonDto> response = personService.findById(id);
+        if (response != null) return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
     @GetMapping("/test")
     public ResponseEntity<ResponseWrapper<List<PersonDto>>> getByVariable(@Valid PersonParams personParams) {
         ResponseWrapper<List<PersonDto>> response = personService.findAll(personParams);
         if (response != null) return ResponseEntity.status(HttpStatus.OK).body(response);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
-    @GetMapping("/{id}")
-   public ResponseEntity<ResponseWrapper<PersonDto>> findById(@PathVariable("id") int id, final HttpServletRequest request) {
-        ResponseWrapper<PersonDto> response = personService.findById(id);
-        if (response != null) return ResponseEntity.status(HttpStatus.OK).body(response);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-    }
-
 }
 
