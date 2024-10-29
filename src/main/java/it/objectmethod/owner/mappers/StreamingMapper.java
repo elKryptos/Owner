@@ -9,12 +9,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {PersonMapper.class, FonteMapper.class})
 public interface StreamingMapper {
-    @Mapping(target = "personDto", source = "person")
-    @Mapping(target = "fonteDto", source = "fonte")
+    @Mapping(target = "name", source = "person.name")
+    @Mapping(target = "surname", source = "person.surname")
+    @Mapping(target = "age", source = "person.age")
+    @Mapping(target = "nome", source = "fonte.nome")
     StreamingDto toDto (Streaming streaming);
     Streaming toEntity (StreamingDto streamingDto);
-    @Mapping(target = "personDto", source = "person.streamings")
-    @Mapping(target = "fonteDto", source = "fonte.streamings")
     List<StreamingDto> toDtoList (List<Streaming> streamings);
     List<Streaming> toEntityList (List<StreamingDto> streamingDtos);
 }
